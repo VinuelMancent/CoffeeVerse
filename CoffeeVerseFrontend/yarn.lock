@@ -2596,7 +2596,7 @@ vue-tsc@^2.0.6:
     "@vue/language-core" "2.0.16"
     semver "^7.5.4"
 
-vue@^3.4.21:
+vue@^3.4.26:
   version "3.4.26"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.4.26.tgz#936c97e37672c737705d7bdfa62c31af18742269"
   integrity sha512-bUIq/p+VB+0xrJubaemrfhk1/FiW9iX+pDV+62I/XJ6EkspAO9/DXEjbDFoe8pIfOZBqfk45i9BMc41ptP/uRg==

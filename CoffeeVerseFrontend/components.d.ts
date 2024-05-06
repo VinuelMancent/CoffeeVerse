@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AddBrewForm: typeof import('./src/components/AddBrewForm/AddBrewForm.vue')['default']
     BrewTable: typeof import('./src/components/BrewTable/BrewTable.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
