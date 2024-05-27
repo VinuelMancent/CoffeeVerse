@@ -1,10 +1,11 @@
 <template>
-  <BrewTable :items="items"/>
+  <BrewTable :items="items" @brew="sendBrewToBackend"/>
 </template>
 
 <script lang="ts" setup>
+import { Ref } from 'vue';
 import BrewTable from '../components/BrewTable/BrewTable.vue'
-import { BrewSettings, BrewTypes } from '../components/BrewTable/types'
+import { BrewSetting, BrewSettings, BrewTypes } from '../components/BrewTable/types'
 
 const items: BrewSettings = [
     {
@@ -14,4 +15,9 @@ const items: BrewSettings = [
     grindlevel: 12,
     watertemperature: 94}
 ]
+
+function sendBrewToBackend(brewsetting: Ref<BrewSetting>){
+  const newBrewsetting: BrewSetting = brewsetting.value
+  console.log(`uploading ${newBrewsetting.watertemperature} to backend`)
+}
 </script>

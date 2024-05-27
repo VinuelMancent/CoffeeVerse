@@ -57,12 +57,8 @@
 import { BrewSetting, BrewTypes } from '../BrewTable/types'
 import { ref, Ref } from 'vue'
 
-const emit = defineEmits({
-  submit(payload: BrewSetting) {
-    // return `true` or `false` to indicate
-    // validation pass / fail
-  }
-})
+const emit = defineEmits(['submit'])
+
 let myBrewSetting: Ref<BrewSetting> = ref({
     brewtype: BrewTypes.Filter,
     coffee: "",
@@ -74,8 +70,8 @@ let myBrewSetting: Ref<BrewSetting> = ref({
 let valid: boolean = true
 
 function emitBrewSetting(){
-    console.log(myBrewSetting.value)
-    emit("submit", myBrewSetting.value)
+    console.log(`emitting brewsetting from form to parent: ${myBrewSetting.value.coffee}`)
+    emit("submit", myBrewSetting)
 }
 </script>
 

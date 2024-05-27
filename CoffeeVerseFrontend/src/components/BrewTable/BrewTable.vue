@@ -27,7 +27,7 @@
                 <v-card title="Füge eine neue Brühung hinzu">
 
                   <v-card-actions>
-                  <AddBrewForm/>
+                  <AddBrewForm @submit="handleNewBrewsetting"/>
                     <v-spacer></v-spacer>
                     <v-btn
                       text="Abbrechen"
@@ -46,13 +46,15 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
-import { BrewSettings } from './types'
+import type { PropType, Ref } from 'vue'
+import { BrewSetting, BrewSettings } from './types'
 import AddBrewForm from '../AddBrewForm/AddBrewForm.vue';
 
 const props = defineProps({
   items: { type: Object as PropType<BrewSettings>, required: true },
 })
+
+const emit = defineEmits(['brew'])
 
 const headers = [
   {
@@ -76,4 +78,9 @@ const headers = [
     key: "watertemperature"
   }
 ]
+
+function handleNewBrewsetting(brewsetting: Ref<BrewSetting>){
+  console.log(`received brewsetting ${brewsetting.value} from AddBrewForm`)
+  emit("brew", brewsetting)
+}
 </script>
