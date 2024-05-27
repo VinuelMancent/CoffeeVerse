@@ -16,8 +16,26 @@ const items: BrewSettings = [
     watertemperature: 94}
 ]
 
-function sendBrewToBackend(brewsetting: Ref<BrewSetting>){
+async function sendBrewToBackend(brewsetting: Ref<BrewSetting>){
   const newBrewsetting: BrewSetting = brewsetting.value
   console.log(`uploading ${newBrewsetting.watertemperature} to backend`)
+
+  const headers: Headers = new Headers()
+  headers.set('Content-Type', 'application/json')
+  // We also need to set the `Accept` header to `application/json`
+  // to tell the server that we expect JSON in response
+  headers.set('Accept', 'application/json')
+  headers.set('Access-Control-Allow-Origin', '*')
+
+  const request: RequestInfo = new Request('http://localhost:8080/insertBrewSetting', {
+    // We need to set the `method` to `POST` and assign the headers
+    method: 'POST',
+    headers: headers,
+    // Convert the user object to JSON and pass it as the body
+    body: JSON.stringify(newBrewsetting)
+  })
+  console.log("send brew to backend")
+  await fetch(request)
+  console.log("sent brew to backend")
 }
 </script>

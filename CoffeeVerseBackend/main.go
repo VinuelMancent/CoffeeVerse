@@ -7,7 +7,16 @@ import (
 	"net/http"
 )
 
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Referrer-Policy", "no-referrer")
+	(*w).Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	(*w).Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+}
+
 func insertBrewSetting(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("Request incoming from client")
+	enableCors(&w)
 	var receivedBrewSetting BrewSetting.BrewSetting
 	err := json.NewDecoder(req.Body).Decode(&receivedBrewSetting)
 	if err != nil {
@@ -19,7 +28,7 @@ func insertBrewSetting(w http.ResponseWriter, req *http.Request) {
 
 func main() {
 	http.HandleFunc("/insertBrewSetting", insertBrewSetting)
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe("localhost:8080", nil)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
